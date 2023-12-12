@@ -78,19 +78,25 @@ maze = generate_maze(height,width)
 
 start_position = (0, 1)
 end_position = (height-1 ,width-2)
-def solve_maze():
+
+def solve_bfs():
     if (bfs(maze, start_position, end_position)):
-        print("Path found!")
+        print("Path found using BFS!")
         maze[end_position[0]][end_position[1]] = 'v'
         update_canvas()
-        messagebox.showinfo("Maze Solver", "Path Found!")
-    # if dfs(maze, start_position, end_position):
-    #     print("Path found!")
-    #     maze[end_position[0]][end_position[1]] = 'v'
-    #     update_canvas()
-    #     messagebox.showinfo("Maze Solver", "Path Found!")
+        messagebox.showinfo("Maze Solver", "Path Found using BFS!")
     else:
-        print("No path found.")
+        print("No path found using BFS.")
+
+def solve_dfs():
+    if (dfs(maze, start_position, end_position)):
+        print("Path found using DFS!")
+        maze[end_position[0]][end_position[1]] = 'v'
+        update_canvas()
+        messagebox.showinfo("Maze Solver", "Path Found using DFS!")
+    else:
+        print("No path found using DFS.")
+
 # Tkinter setup
 root = tk.Tk()
 root.title("Maze Solver")
@@ -99,7 +105,11 @@ cell_size = 30
 canvas = tk.Canvas(root, width=len(maze[0]) * cell_size, height=len(maze) * cell_size, bg="white")
 canvas.pack()
 
-solve_button = tk.Button(root, text="Solve Maze", command=solve_maze)
-solve_button.pack()
+
+bfs_button = tk.Button(root, text="Solve Maze using BFS", command=solve_bfs)
+bfs_button.pack()
+
+dfs_button = tk.Button(root, text="Solve Maze using DFS", command=solve_dfs)
+dfs_button.pack()
 
 root.mainloop()
