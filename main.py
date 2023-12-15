@@ -11,8 +11,6 @@ def bfs(maze, start, end):
         return 0 <= x < rows and 0 <= y < cols and maze[x][y] == 'c'
 
     def explore(x, y):
-        
-      
         directions = [(0, 1),(1, 0),(-1, 0), (0, -1)]
         queue = deque([(x, y)])
         while queue:
@@ -73,7 +71,7 @@ def update_canvas():
 
 # Example maze
 width = 34
-height = 10
+height = 15
 maze = generate_maze(height,width)
 
 start_position = (0, 1)
@@ -104,6 +102,7 @@ root.title("Maze Solver")
 cell_size = 30
 canvas = tk.Canvas(root, width=len(maze[0]) * cell_size, height=len(maze) * cell_size, bg="white")
 canvas.pack()
+update_canvas()
 
 
 bfs_button = tk.Button(root, text="Solve Maze using BFS", command=solve_bfs)
